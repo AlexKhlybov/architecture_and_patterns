@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+jinja2 = "*"
+isort = "*"
+flake8 = "*"
 
 [dev-packages]
 
