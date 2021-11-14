@@ -1,232 +1,36 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+{% extends 'base.html' %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
     
-    <!-- Useful meta tags -->
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow, noodp">
-    <meta name="googlebot" content="index, follow">
-    <meta name="google" content="notranslate">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    
-    <title>HomePage</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-</head>
-<body>
-
-<svg style="display: none;">
-   <symbol id="vk" viewbox="0 0 24 24">
-        <g>
-            <path d="m19.915 13.028c-.388-.49-.277-.708 0-1.146.005-.005 3.208-4.431 3.538-5.932l.002-.001c.164-.547 0-.949-.793-.949h-2.624c-.668 0-.976.345-1.141.731 0 0-1.336 3.198-3.226 5.271-.61.599-.892.791-1.225.791-.164 0-.419-.192-.419-.739v-5.105c0-.656-.187-.949-.74-.949h-4.126c-.419 0-.668.306-.668.591 0 .622.945.765 1.043 2.515v3.797c0 .832-.151.985-.486.985-.892 0-3.057-3.211-4.34-6.886-.259-.713-.512-1.001-1.185-1.001h-2.625c-.749 0-.9.345-.9.731 0 .682.892 4.073 4.148 8.553 2.17 3.058 5.226 4.715 8.006 4.715 1.671 0 1.875-.368 1.875-1.001 0-2.922-.151-3.198.686-3.198.388 0 1.056.192 2.616 1.667 1.783 1.749 2.076 2.532 3.074 2.532h2.624c.748 0 1.127-.368.909-1.094-.499-1.527-3.871-4.668-4.023-4.878z"/>
-        </g>
-   </symbol>
-
-   <symbol id="fb" viewbox="0 0 24 24">
-        <g>
-            <path d="m15.997 3.985h2.191v-3.816c-.378-.052-1.678-.169-3.192-.169-3.159 0-5.323 1.987-5.323 5.639v3.361h-3.486v4.266h3.486v10.734h4.274v-10.733h3.345l.531-4.266h-3.877v-2.939c.001-1.233.333-2.077 2.051-2.077z"/>
-        </g>
-   </symbol>
-
-   <symbol id="inst" viewbox="0 0 511 511.9">
-        <g>
-            <path d="m510.949219 150.5c-1.199219-27.199219-5.597657-45.898438-11.898438-62.101562-6.5-17.199219-16.5-32.597657-29.601562-45.398438-12.800781-13-28.300781-23.101562-45.300781-29.5-16.296876-6.300781-34.898438-10.699219-62.097657-11.898438-27.402343-1.300781-36.101562-1.601562-105.601562-1.601562s-78.199219.300781-105.5 1.5c-27.199219 1.199219-45.898438 5.601562-62.097657 11.898438-17.203124 6.5-32.601562 16.5-45.402343 29.601562-13 12.800781-23.097657 28.300781-29.5 45.300781-6.300781 16.300781-10.699219 34.898438-11.898438 62.097657-1.300781 27.402343-1.601562 36.101562-1.601562 105.601562s.300781 78.199219 1.5 105.5c1.199219 27.199219 5.601562 45.898438 11.902343 62.101562 6.5 17.199219 16.597657 32.597657 29.597657 45.398438 12.800781 13 28.300781 23.101562 45.300781 29.5 16.300781 6.300781 34.898438 10.699219 62.101562 11.898438 27.296876 1.203124 36 1.5 105.5 1.5s78.199219-.296876 105.5-1.5c27.199219-1.199219 45.898438-5.597657 62.097657-11.898438 34.402343-13.300781 61.601562-40.5 74.902343-74.898438 6.296876-16.300781 10.699219-34.902343 11.898438-62.101562 1.199219-27.300781 1.5-36 1.5-105.5s-.101562-78.199219-1.300781-105.5zm-46.097657 209c-1.101562 25-5.300781 38.5-8.800781 47.5-8.601562 22.300781-26.300781 40-48.601562 48.601562-9 3.5-22.597657 7.699219-47.5 8.796876-27 1.203124-35.097657 1.5-103.398438 1.5s-76.5-.296876-103.402343-1.5c-25-1.097657-38.5-5.296876-47.5-8.796876-11.097657-4.101562-21.199219-10.601562-29.398438-19.101562-8.5-8.300781-15-18.300781-19.101562-29.398438-3.5-9-7.699219-22.601562-8.796876-47.5-1.203124-27-1.5-35.101562-1.5-103.402343s.296876-76.5 1.5-103.398438c1.097657-25 5.296876-38.5 8.796876-47.5 4.101562-11.101562 10.601562-21.199219 19.203124-29.402343 8.296876-8.5 18.296876-15 29.398438-19.097657 9-3.5 22.601562-7.699219 47.5-8.800781 27-1.199219 35.101562-1.5 103.398438-1.5 68.402343 0 76.5.300781 103.402343 1.5 25 1.101562 38.5 5.300781 47.5 8.800781 11.097657 4.097657 21.199219 10.597657 29.398438 19.097657 8.5 8.300781 15 18.300781 19.101562 29.402343 3.5 9 7.699219 22.597657 8.800781 47.5 1.199219 27 1.5 35.097657 1.5 103.398438s-.300781 76.300781-1.5 103.300781zm0 0"/><path d="m256.449219 124.5c-72.597657 0-131.5 58.898438-131.5 131.5s58.902343 131.5 131.5 131.5c72.601562 0 131.5-58.898438 131.5-131.5s-58.898438-131.5-131.5-131.5zm0 216.800781c-47.097657 0-85.300781-38.199219-85.300781-85.300781s38.203124-85.300781 85.300781-85.300781c47.101562 0 85.300781 38.199219 85.300781 85.300781s-38.199219 85.300781-85.300781 85.300781zm0 0"/><path d="m423.851562 119.300781c0 16.953125-13.746093 30.699219-30.703124 30.699219-16.953126 0-30.699219-13.746094-30.699219-30.699219 0-16.957031 13.746093-30.699219 30.699219-30.699219 16.957031 0 30.703124 13.742188 30.703124 30.699219zm0 0"/>
-        </g>
-   </symbol>
-
-   <symbol id="close" viewbox="0 0 512.001 512.001">
-       <g>
-            <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-                L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-                c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-                l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-                L284.286,256.002z"/>
-        </g>
-   </symbol>
-
-   <symbol id="layers" viewbox="0 0 512.002 512.002">
-       <g>
-            <path d="M512.001,255.969c-0.011-5.193-2.708-10.011-7.129-12.737l-52.034-32.076l52.089-32.421
-                c4.393-2.734,7.066-7.539,7.074-12.712c0.008-5.174-2.651-9.987-7.036-12.734l-241-151c-4.871-3.052-11.058-3.052-15.929,0
-                l-241,151c-4.384,2.747-7.043,7.56-7.036,12.734c0.008,5.174,2.681,9.979,7.074,12.712l51.732,32.198L7.051,243.282
-                c-4.39,2.744-7.055,7.557-7.05,12.734c0.005,5.177,2.679,9.985,7.074,12.721l51.732,32.198L7.051,333.282
-                c-4.383,2.74-7.047,7.543-7.05,12.712s2.656,9.975,7.036,12.719l241,151c2.436,1.526,5.2,2.289,7.964,2.289
-                c2.764,0,5.529-0.763,7.964-2.289l241-151c4.394-2.753,7.055-7.581,7.036-12.766c-0.019-5.185-2.715-9.993-7.129-12.714
-                l-52.034-32.076l52.089-32.421C509.336,265.992,512.012,261.162,512.001,255.969z M43.32,165.96L256.001,32.703L468.682,165.96
-                c-2.044,1.272-206.586,128.58-212.681,132.374L43.32,165.96z M468.584,346.106L256.001,479.301L43.278,346.018l43.889-27.431
-                l160.908,100.15c2.426,1.51,5.176,2.265,7.926,2.265c2.75,0,5.5-0.755,7.926-2.265l160.464-99.874L468.584,346.106z
-                 M256.001,388.334L43.345,255.976l43.822-27.389l160.908,100.15c2.426,1.51,5.176,2.265,7.926,2.265c2.75,0,5.5-0.755,7.926-2.265
-                l160.464-99.874l44.125,27.2C467.297,256.822,261.631,384.829,256.001,388.334z"/>
-    </g>
-   </symbol>
-
-   <symbol id="arrow-right" viewbox="0 0 490.8 490.8">
-       <g>
-            <path d="M135.685,3.128c-4.237-4.093-10.99-3.975-15.083,0.262c-3.992,4.134-3.992,10.687,0,14.82
-            l227.115,227.136L120.581,472.461c-4.237,4.093-4.354,10.845-0.262,15.083c4.093,4.237,10.845,4.354,15.083,0.262
-            c0.089-0.086,0.176-0.173,0.262-0.262l234.667-234.667c4.164-4.165,4.164-10.917,0-15.083L135.685,3.128z"/>
-            <path d="M128.133,490.68c-5.891,0.011-10.675-4.757-10.686-10.648c-0.005-2.84,1.123-5.565,3.134-7.571l227.136-227.115
-            L120.581,18.232c-4.171-4.171-4.171-10.933,0-15.104c4.171-4.171,10.933-4.171,15.104,0l234.667,234.667
-            c4.164,4.165,4.164,10.917,0,15.083L135.685,487.544C133.685,489.551,130.967,490.68,128.133,490.68z"/>
-       </g>
-   </symbol>
-
-</svg>
-
-<div class="page">
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-    
-                <div class="row  header__row">
-                    <div class="col-lg-2">
-                        <a class="logo" href="index.html">
-                            <span class="logo_prefix">in</span>Web
-                        </a>
-                    </div>
-    
-                    <div class="col-lg-8">
-                        <nav class="nav">
-                            <a class="nav__link  active" href="index.html">Главная</a>
-                            <a class="nav__link" href="services.html">Услуги</a>
-                            <a class="nav__link" href="portfolio.html">Портфолио</a>
-                        </nav>
-                    </div>
-    
-                    <div class="col-lg-2">
-                        <div class="lang">
-                            <a class="lang__item active" href="#">ru</a>
-                            <a class="lang__item" href="#">en</a>
-                        </div>
-                    </div>
-                </div><!-- /.row -->
-    
-            </div><!-- /.header__inner -->
-        </div><!-- /.container -->
-    </header>
-
+{% block content %}    
     <!-- Content -->
     <div class="content">
-        
-        
         <div class="container">
             <div class="intro">
                 <div class="intro__text">Меня зовут</div>
                 <div class="intro__title">Иван Иванов</div>
                 <div class="intro__subtitle">я занимаюсь <span class="intro__subtitle-pink">веб-дизайном</span> и <span class="intro__subtitle-pink">созданием сайтов</span></div>
-        
-               <div class="row">
-                   <div class="col-lg-3">
+            <div class="row">
+                <div class="col-lg-3">
                         <a class="btn  btn--pink" href="#" data-toggle="modal" data-target="#request-modal">Оставить заявку</a>
-                   </div>
-        
-                   <div class="col-lg-9">
-                       <ul class="contacts">
-                           <li class="contacts__item">
-                               <a href="tel:+79852320000" class="contacts__link">+7 (985) 232-00-00</a>
-                           </li>
-                           <li class="contacts__item">
-                               <a href="mailto:hello@inweb.com" class="contacts__link">hello@inweb.com</a>
-                           </li>
-                       </ul>
-                   </div>
-               </div><!-- /.row -->
-        
+                </div>
+                <div class="col-lg-9">
+                    <ul class="contacts">
+                        <li class="contacts__item">
+                            <a href="tel:+79852320000" class="contacts__link">+7 (985) 232-00-00</a>
+                        </li>
+                        <li class="contacts__item">
+                            <a href="mailto:hello@inweb.com" class="contacts__link">hello@inweb.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- /.row -->
             </div><!-- /.intro -->
         </div><!-- /.container -->
         
-        
-        <img class="author" src="assets/img/man.png" alt="">
+        <img class="author" src="{{ static }}img/man.png" alt="">
         <div class="circle"></div>
-        
-        
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-    
-            <div class="social">
-               <div class="social__text">Мои соц.сети</div>
-                <a class="social__link" href="#" target="_blank">
-                    <svg class="social__icon">
-                        <use xlink:href="#vk"></use>
-                    </svg>
-                </a>
-    
-                <a class="social__link" href="#" target="_blank">
-                    <svg class="social__icon  social__icon--fb">
-                        <use xlink:href="#fb"></use>
-                    </svg>
-                </a>
-    
-                <a class="social__link" href="#" target="_blank">
-                    <svg class="social__icon  social__icon--inst">
-                        <use xlink:href="#inst"></use>
-                    </svg>
-                </a>
-    
-            </div>
-        </div>
-    </footer>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="request-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-           <button type="button" class="modal__close" data-dismiss="modal" aria-label="Close">
-                <svg class="modal__close-icon">
-                    <use xlink:href="#close"></use>
-                </svg>
-            </button>
-
-            <div class="modal__title">Оставить заявку</div>
-            <div class="modal__text">Заполните форму и я свяжусь с вами в ближайшее время!</div>
-
-            <form class="form" action="/" method="post">
-                <div class="form__group">
-                    <input class="input" type="text" placeholder="Ваше имя">
-                </div>
-
-                <div class="form__group">
-                    <input class="input" type="email" placeholder="Ваш e-mail">
-                </div>
-
-                <div class="form__group">
-                    <input class="input" type="tel" placeholder="Ваш телефон">
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <button class="btn btn--pink" type="submit">Оставить заявку</button>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="contacts contacts--modal">
-                           <li class="contacts__item">
-                               <a href="tel:+7985232000" class="contacts__link">+7 (985) 232-00-00</a>
-                           </li>
-                           <li class="contacts__item">
-                               <a href="mailto:hello@inweb.com" class="contacts__link">hello@inweb.com</a>
-                           </li>
-                       </ul>
-                    </div>
-                </div>
-            </form>
-
-        </div><!-- /.modal-content-->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<script src="assets/js/app.min.js"></script>
-
-</body>
-</html>
-
+{% endblock content %}

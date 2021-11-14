@@ -1,9 +1,10 @@
 from wsgiref.simple_server import make_server
 
+from components import settings
 from origina_framework.main import Origin
-from urls import routes
+from views import routes
 
-application = Origin(routes)
+application = Origin(settings, routes)
 
 
 with make_server('', 8000, application) as httpd:

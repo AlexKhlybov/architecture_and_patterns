@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="{{ static }}css/style.min.css">
+    
+    <!-- Useful meta tags -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow, noodp">
+    <meta name="googlebot" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+</head>
+<body>
+
+{% include 'includes/icon.html' %}
+
+<div class="page">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="row  header__row">
+                    <div class="col-lg-2">
+                        <a class="logo" href="/">
+                            <span class="logo_prefix">in</span>Web
+                        </a>
+                    </div>
+                    <div class="col-lg-8">
+                        <nav class="nav">
+                            <a class="nav__link  active" href="/">Главная</a>
+                            <a class="nav__link" href="/services/">Услуги</a>
+                            <a class="nav__link" href="/portfolio/">Портфолио</a>
+                        </nav>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="lang">
+                            <a class="lang__item active" href="#">ru</a>
+                            <a class="lang__item" href="#">en</a>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.header__inner -->
+        </div><!-- /.container -->
+    </header>
+
+    {% block content %}
+        
+    {% endblock content %}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social">
+            <div class="social__text">Мои соц.сети</div>
+                <a class="social__link" href="#" target="_blank">
+                    <svg class="social__icon">
+                        <use xlink:href="#vk"></use>
+                    </svg>
+                </a>
+                <a class="social__link" href="#" target="_blank">
+                    <svg class="social__icon  social__icon--fb">
+                        <use xlink:href="#fb"></use>
+                    </svg>
+                </a>
+                <a class="social__link" href="#" target="_blank">
+                    <svg class="social__icon  social__icon--inst">
+                        <use xlink:href="#inst"></use>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    </footer>
+</div>
+
+{% include 'includes/modal.html' %}
+
+<script src="{{ static }}js/app.min.js"></script>
+
+</body>
+</html>
+
