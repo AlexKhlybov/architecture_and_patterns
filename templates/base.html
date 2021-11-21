@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% include 'includes/inc-meta.html' %}
+    {% include 'includes/inc-style.html' %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% include 'includes/inc-icon.html' %}
+<div class="page">
+    {% include 'includes/inc-header.html' %}
+    {% block content %}{% endblock content %}
+    {% include 'includes/inc-footer.html' %}
+</div>
+{% include 'includes/inc-modal.html' %}
+{% include 'includes/inc-scrypts.html' %}
+</body>
+</html>
+

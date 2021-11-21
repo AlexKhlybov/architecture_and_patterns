@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="request-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+           <button type="button" class="modal__close" data-dismiss="modal" aria-label="Close">
+                <svg class="modal__close-icon">
+                    <use xlink:href="#close"></use>
+                </svg>
+            </button>
+
+            <div class="modal__title">Оставить заявку</div>
+            <div class="modal__text">Заполните форму и я свяжусь с вами в ближайшее время!</div>
+
+            <form class="form" action="" method="post">
+                <div class="form__group">
+                    <input name="name" class="input" type="text" placeholder="Ваше имя">
+                </div>
+
+                <div class="form__group">
+                    <input name="email"  class="input" type="email" placeholder="Ваш e-mail">
+                </div>
+
+                <div class="form__group">
+                    <input name="telephone" class="input" type="tel" placeholder="Ваш телефон">
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn--pink" type="submit">Оставить заявку</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="contacts contacts--modal">
+                           <li class="contacts__item">
+                               <a href="tel:+7985232000" class="contacts__link">+7 (985) 232-00-00</a>
+                           </li>
+                           <li class="contacts__item">
+                               <a href="mailto:hello@inweb.com" class="contacts__link">hello@inweb.com</a>
+                           </li>
+                       </ul>
+                    </div>
+                </div>
+            </form>
+
+        </div><!-- /.modal-content-->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
