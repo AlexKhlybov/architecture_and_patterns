@@ -4,11 +4,12 @@ from os import path
 from components.content_types import CONTENT_TYPES_MAP
 
 from .requests import GetRequests, PostRequests
+from .responce import Status
 
 
 class PageNotFound404:
     def __call__(self):
-        return "404 WHAT", "404 PAGE Not Found"
+        return Status.HTTP_404_NOT_FOUND()
 
 
 class Origin:
@@ -65,7 +66,7 @@ class Origin:
         path_to_file = path.join(static_dir, file_path)
         with open(path_to_file, "rb") as f:
             file_content = f.read()
-        status_code = "200 OK"
+        status_code = Status.HTTP_200_OK()
         return status_code, file_content
 
     @staticmethod

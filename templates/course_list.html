@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Список курсов{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Список курсов</h1>
+            <div class="portfolio">
+                <div><a href="/">назад на главную</a></div>
+                <br>
+                <br>
+                {% if say %}
+                    <div class="alert alert-warning" role="alert">
+                        {{ say }}
+                    </div>
+                {% endif %}
+                <div>
+                    <a href="/create-course/?id={{id}}">Создать новый курс</a>
+                    <br>
+                    <h1>Список курсов для категории "{{name}}"</h1>
+                    {% for item in objects_list %}
+                    <li>
+                        {{item.name}} <span><a href="/copy-course/?name={{item.name}}">скопировать</a></span>
+                    </li>
+                    {% endfor %}
+                </div>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Учебная программа{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Учебная программа</h1>
+            <div class="portfolio">
+                <p>Курсы в течение года.</p>
+                <p>Расписание действует на: <b>{{date.strftime('%Y-%m-%d')}}</b></p>
+                <table class="table  table-bordered">
+                    <thead>
+                        <tr class="head">
+                            <th class="col-5"></th>
+                            <th class="col-2">Москва</th>
+                            <th class="col-2">Санкт-Петербург</th>
+                            <th class="col-3">Екатеринбург</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="row">Перспектива программирования</th>
+                            <td>Сб, 20 февраля 2021<br />11:00 - 14:00</td>
+                            <td>Сб, 6 марта 2021<br />11:00 - 14:00</td>
+                            <td>Сб, 20 марта 2021<br />11:00 - 14:00</td>
+                        </tr>
+                        <tr>
+                            <th class="row">Программируем на ...</th>
+                            <td>Сб, 10 апреля 2021<br />11:00 - 13:00</td>
+                            <td>Сб, 1 мая 2021<br />11:00 - 13:00</td>
+                            <td>Сб, 8 мая 2021<br />11:00 - 13:00</td>
+                        </tr>
+                        <tr>
+                            <th class="row">Приложения для ...</th>
+                            <td>Сб, 26 июня 2021<br />11:00 - 14:00</td>
+                            <td>Сб, 3 июля 2021<br />11:00 - 14:00</td>
+                            <td>Сб, 10 июля 2021<br />11:00 - 14:00</td>
+                        </tr>
+                        <tr>
+                            <th class="row">WEB для всех</th>
+                            <td>Сб, 28 августа 2021<br />11:00 - 16:00</td>
+                            <td>Сб, 4 сентября 2021<br />11:00 - 16:00</td>
+                            <td>Сб, 11 сентября 2021<br />11:00 - 16:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Зарегистрируйтесь</legend>
+                        <p><label class="title" for="name">Ваше имя:</label>
+                            <input type="text" name="name" id="name"><br />
+                            <label class="title" for="email">Ваш email:</label>
+                            <input type="text" name="email" id="email"></p>
+                        <p><label for="location" class="title">Ближайший центр:</label>
+                            <select name="location" id="location">
+                                <option value="msk">Москва</option>
+                                <option value="spb">Санкт-Петербург</option>
+                                <option value="ekb">Екатеринбург</option>
+                            </select></p>
+                        <span class="title">Являетесь участником?</span>
+                        <label><input type="radio" name="member" value="yes" /> Да</label>
+                        <label><input type="radio" name="member" value="no" /> Нет</label></p>
+                    </fieldset>
+                    <div class="submit"><input type="submit" value="Регистрация" /></div>
+                </form>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}
