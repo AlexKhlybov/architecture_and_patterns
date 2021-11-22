@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание курса{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Создание курса</h1>
+            <div class="portfolio">
+                
+                {% if say %}
+                    <div><a href="/study_programs/">на главную</a></div>
+                    <br>
+                    <br>
+                    <div class="alert alert-warning" role="alert">
+                        {{ say }}
+                    </div>
+                {% else %}
+                    <div><a href="/courses-list/?id={{id}}">назад</a></div>
+                    <br>
+                    <br>
+                    <div>
+                        <h1>Создание курса для категории "{{name}}"</h1>
+                        <form method="post">
+                            <input type="text" name="name" placeholder="Название">
+                            <button type="submit">Сохранить и вернуться к списку курсов</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}

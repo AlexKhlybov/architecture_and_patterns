@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Список категорий{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Список категорий</h1>
+            <div class="portfolio">
+                <a href="/">назад</a>
+                <ul>
+                {% for item in objects_list %}
+                    <li>{{item.name}} <span>Количество курсов: {{item.course_count()}}</span></li>
+                    <a href="/create-course/?id={{item.id}}">Создать курс</a>
+                    <a href="/courses-list/?id={{item.id}}">Список курсов</a>
+                {% endfor %}
+                </ul>
+                <div>
+                    <li><a href="/create-category/">Создать категорию</a></li>
+                </div>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание категории{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Создание категории</h1>
+            <div class="portfolio">
+                <form method="post">
+                    <input type="text" name="name" placeholder="Название">
+                    <button type="submit">Сохранить и вернуться на главную</button>
+                </form>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}
