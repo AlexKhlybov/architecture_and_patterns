@@ -2,6 +2,7 @@ import quopri
 from os import path
 
 from components.content_types import CONTENT_TYPES_MAP
+from views import FakeViews
 
 from .requests import GetRequests, PostRequests
 from .responce import Status
@@ -77,3 +78,22 @@ class Origin:
             val_decode_str = quopri.decodestring(val).decode("UTF-8")
             new_data[k] = val_decode_str
         return new_data
+
+
+class FakeOrigin:
+    def __init__(self, settings, routes_obj):
+        self.routes_lst = routes_obj
+        self.settings = settings
+
+    def __call__(self, environ, start_response):
+        path = environ["PATH_INFO"]
+
+        if not path.endswith("/"):
+            path = f"{path}/"
+
+        view = FakeViews()
+        content_type = Origin.get_content_type(path)
+        code, body = view()
+        body = body.encode("utf-8")
+        start_response(code, [("Content-Type", content_type)])
+        return [body]
