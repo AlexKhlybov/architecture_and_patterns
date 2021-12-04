@@ -9,6 +9,8 @@ isort = "*"
 flake8 = "*"
 black = "*"
 bandit = "*"
+jsonpickle = "*"
+lock = "*"
 
 [dev-packages]
 

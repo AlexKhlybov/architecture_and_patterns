@@ -1,9 +1,12 @@
 import copy
 import quopri
+from behavioral_patterns import ConsoleWriter, Subject
 
 
 class User:
-    pass
+
+    def __init__(self, name):
+        self.name = name
 
 
 class Teacher(User):
@@ -11,7 +14,10 @@ class Teacher(User):
 
 
 class Student(User):
-    pass
+
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 
 class UserFactory:
@@ -125,9 +131,11 @@ class SingletoneByName(type):
 
 
 class Logger(metaclass=SingletoneByName):
-    def __init__(self, name):
-        self.name = name
 
-    @staticmethod
-    def log(text):
-        print("log--->", text)
+    def __init__(self, name, writer=ConsoleWriter()):
+        self.name = name
+        self.writer = writer
+
+    def log(self, text):
+        text = f'log--->, {text}'
+        self.writer.write(text)

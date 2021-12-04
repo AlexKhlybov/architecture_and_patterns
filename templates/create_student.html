@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание студента{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Создание студента</h1>
+            <div class="portfolio">
+                <div>
+                    <li>
+                        <a href="/student-list/">Список студентов</a>
+                    </li>
+                    <li>
+                        <a href="/add-student/">Добавить студента на курс</a>
+                    </li>
+                </div>
+                <div>
+                    <h1>Создание студента</h1>
+                    <form method="post">
+                        <input type="text" name="name" placeholder="Имя">
+                        <button type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}

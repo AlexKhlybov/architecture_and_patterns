@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавление студента на курс{% endblock title %}
+    
+{% block content %}    
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <h1 class="content__title">Добавление студента на курс</h1>
+            <div class="portfolio">
+                <div>
+                    <li>
+                        <a href="/student-list/">Список студентов</a>
+                    </li>
+                    <li>
+                        <a href="/create-student/">Создать студента</a>
+                    </li>
+                </div>
+                <form method="post">
+                    <select size="3" name="course_name">
+                        {% for item in courses %}
+                        <option value="{{item.name}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <select size="3" name="student_name">
+                        {% for item in students %}
+                        <option value="{{item.name}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Записать</button>
+                </form>
+            </div><!-- /.portfolio -->
+        </div><!-- /.container -->
+    </div>
+{% endblock content %}
