@@ -1,6 +1,6 @@
 import copy
 import quopri
-from behavioral_patterns import ConsoleWriter, Subject
+from .behavioral_patterns import ConsoleWriter, Subject
 
 
 class User:
