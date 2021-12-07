@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 
 from components import settings
-from origina_framework.main import FakeOrigin, Origin # noqa
+from origina_framework.main import FakeOrigin, Origin  # noqa
 from views import routes
 
 application = Origin(settings, routes)

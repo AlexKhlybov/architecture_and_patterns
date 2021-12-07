@@ -1,10 +1,12 @@
 import copy
 import quopri
-from .behavioral_patterns import ConsoleWriter, Subject
+import sqlite3
+
+from patterns.architecturall_unit_of_work import DomainObject
+from patterns.behavioral_patterns import ConsoleWriter, Subject
 
 
 class User:
-
     def __init__(self, name):
         self.name = name
 
@@ -13,8 +15,7 @@ class Teacher(User):
     pass
 
 
-class Student(User):
-
+class Student(User, DomainObject):
     def __init__(self, name):
         self.courses = []
         super().__init__(name)
@@ -33,11 +34,21 @@ class CoursePrototype:
         return copy.deepcopy(self)
 
 
-class Course(CoursePrototype):
+class Course(CoursePrototype, Subject):
     def __init__(self, name, category):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        return self.students[item]
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
+        self.notify()
 
 
 class InteractiveCourse(Course):
@@ -99,11 +110,16 @@ class Engine:
     def create_course(type_, name, category):
         return CourseFactory.create(type_, name, category)
 
-    def get_course(self, name):
+    def get_course(self, name) -> Course:
         for item in self.courses:
             if item.name == name:
                 return item
         return None
+
+    def get_student(self, name) -> Student:
+        for item in self.students:
+            if item.name == name:
+                return item
 
     @staticmethod
     def decode_value(val):
@@ -131,11 +147,102 @@ class SingletoneByName(type):
 
 
 class Logger(metaclass=SingletoneByName):
-
     def __init__(self, name, writer=ConsoleWriter()):
         self.name = name
         self.writer = writer
 
     def log(self, text):
-        text = f'log--->, {text}'
+        text = f"log--->, {text}"
         self.writer.write(text)
+
+
+class StudentMapper:
+    def __init__(self, connection):
+        self.connection = connection
+        self.cursor = connection.cursor()
+        self.tablename = "student"
+
+    def all(self):
+        statement = f"SELECT * from {self.tablename}"
+        self.cursor.execute(statement)
+        result = []
+        for item in self.cursor.fetchall():
+            id, name = item
+            student = Student(name)
+            student.id = id
+            result.append(student)
+        return result
+
+    def find_by_id(self, id):
+        statement = f"SELECT id, name FROM {self.tablename}"
+        self.cursor.execute(statement, (id,))
+        result = self.cursor.fetchone()
+        if result:
+            return Student(*result)
+        else:
+            return RecordNotFoundException(f"record with id={id} not found")
+
+    def insert(self, obj):
+        statement = f"INSERT INTO {self.tablename} (name) VALUES (?)"
+        self.cursor.execute(statement, (obj.name,))
+        try:
+            self.connection.commit()
+        except Exception as ex:
+            raise DbCommitException(ex.args)
+
+    def update(self, obj):
+        statement = f"UPDATE {self.tablename} SET name=? WHERE id=?"
+        self.cursor.execute(statement, (obj.name, obj.id))
+        try:
+            self.connection.commit()
+        except Exception as ex:
+            raise DbUpdateException(ex.args)
+
+    def delete(self, obj):
+        statement = f"DELETE FROM {self.tablename} WHERE id=?"
+        self.cursor.execute(statement, (obj.id,))
+        try:
+            self.connection.commit()
+        except Exception as ex:
+            raise DbDeleteException(ex.args)
+
+
+connection = sqlite3.connect("patterns.sqlite")
+
+
+class MapperRegistry:
+    mappers = {
+        "students": StudentMapper,
+        # "course": CourseMapper
+    }
+
+    @staticmethod
+    def get_mapper(obj):
+        if isinstance(obj, Student):
+            return StudentMapper(connection)
+        # if isinstance(obj, Category):
+        #     return CategoryMapper(connection)
+
+    @staticmethod
+    def get_current_mapper(name):
+        return MapperRegistry.mappers[name](connection)
+
+
+class DbCommitException(Exception):
+    def __init__(self, message):
+        super().__init__(f"Db commit error: {message}")
+
+
+class DbUpdateException(Exception):
+    def __init__(self, message):
+        super().__init__(f"Db update error: {message}")
+
+
+class DbDeleteException(Exception):
+    def __init__(self, message):
+        super().__init__(f"Db delete error: {message}")
+
+
+class RecordNotFoundException(Exception):
+    def __init__(self, message):
+        super().__init__(f"Record not found: {message}")
